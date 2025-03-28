@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N-Dimensional Cube Rotator</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { margin: 0; overflow: hidden; font-family: sans-serif; }
+        #container { width: 100vw; height: 100vh; display: block; }
+        #controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            max-width: 300px;
+        }
+        #controls label, #controls select, #controls input {
+            display: block;
+            margin-bottom: 8px;
+        }
+        #controls input[type="range"] {
+            width: 100%;
+        }
+        #controls h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #555;
+            padding-bottom: 5px;
+        }
+        #rotation-planes {
+             max-height: 150px;
+             overflow-y: auto;
+             margin-bottom: 10px;
+             padding-right: 5px; /* For scrollbar */
+        }
+        .plane-control {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .plane-control label {
+            flex-grow: 1;
+            margin-bottom: 0; /* Override general label style */
+        }
+        .plane-control input[type="range"] {
+            width: 150px; /* Adjust as needed */
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <div id="controls">
+        <h3>Controls</h3>
+
+        <label for="dimensions">Dimensions (N):</label>
+        <input type="range" id="dimensions" name="dimensions" min="3" max="10" value="4">
+        <span id="dimensions-value">4</span>D
+
+        <label for="projection-type">Projection:</label>
+        <select id="projection-type" name="projection-type">
+            <option value="orthographic" selected>Orthographic</option>
+            <option value="perspective">Perspective</option>
+        </select>
+
+        <label for="rotation-speed">Global Speed:</label>
+        <input type="range" id="rotation-speed" name="rotation-speed" min="0" max="0.1" step="0.001" value="0.01">
+        <span id="rotation-speed-value">0.01</span>
+
+        <label for="color-scheme">Color Scheme:</label>
+        <select id="color-scheme" name="color-scheme">
+            <option value="default" selected>Default</option>
+            <option value="rainbow">Rainbow Edges</option>
+            <option value="depth">Depth Cue</option>
+        </select>
+
+        <h4>Rotation Planes</h4>
+        <div id="rotation-planes">
+            <!-- Rotation plane sliders will be dynamically added here -->
+            <p>Select dimensions >= 3</p>
+        </div>
+    </div>
+
+    <!-- Import Three.js -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.163.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.163.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <!-- Main Application Logic -->
+    <script type="module" src="main.js"></script>
+</body>
+</html>
